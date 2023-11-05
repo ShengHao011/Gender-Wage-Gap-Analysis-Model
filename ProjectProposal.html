@@ -7505,7 +7505,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Gender wage disparity is a multifaceted issue rooted in societal norms and systemic biases. Despite progress made in terms of gender equality, there continues to be a disparity in wages in numerous vocations. Tozcek et al.’s 2021 study shows that even when considering relevant factors that could influence salary, there was still a discrepancy in pay. Rotman et al.’s 2022 study claims that understanding the gender wage gap and its enduring existence requires acknowledging the reality that women are paid less for their talents than men, rather than the differences in the qualities of male and female workers.</p>
-<p>We aim to answer the question 'Is there a significant difference in the proportions of men and women who earn more than 50K in the United States?' Our response variable is the difference in proportions of men and women because this allows us to analyze the disparity in income. To help up estimate the variability around the differences between the proportions, we will use standard deviation as our scale parameter.</p>
+<p>We aim to answer the question 'Is there a significant difference in the proportions of men and women who earn more than 50K in the United States?' Our response variable is the difference in proportions of men and women because this allows us to analyze the disparity in income. To estimate the variability around the differences between the proportions, we will use standard deviation as our scale parameter.</p>
 <p>Our data comes from the 1994 Census and was used to predict whether an individual earns more than $50,000 USD annually. It has 15 variables, but we will focus on two categorical variables: <code>Sex</code> ("Male, "Female") and <code>Income</code> ("&gt;50K", "&lt;=50K").</p>
 </div>
 </div>
@@ -7518,6 +7518,17 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Preliminary-Results">Preliminary Results<a class="anchor-link" href="#Preliminary-Results">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ad30d1b9-7c30-438a-9399-4457ad8911ab">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>First, we load the necessary libraries and set the seed.</p>
 </div>
 </div>
 </div>
@@ -7570,7 +7581,7 @@ a.anchor-link {
 <span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">dplyr</span>::<span class="ansi-green-fg">lag()</span>      masks <span class="ansi-blue-fg">stats</span>::lag()
 <span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">yardstick</span>::<span class="ansi-green-fg">spec()</span> masks <span class="ansi-blue-fg">readr</span>::spec()
 <span class="ansi-red-fg">✖</span> <span class="ansi-blue-fg">recipes</span>::<span class="ansi-green-fg">step()</span>   masks <span class="ansi-blue-fg">stats</span>::step()
-<span class="ansi-blue-fg">•</span> Search for functions across packages at <span class="ansi-green-fg">https://www.tidymodels.org/find/</span>
+<span class="ansi-blue-fg">•</span> Use <span class="ansi-green-fg">tidymodels_prefer()</span> to resolve common conflicts.
 
 </pre>
 </div>
@@ -7584,7 +7595,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>First, we read and tidy the dataset.</p>
+<p>Now, we can read and tidy the dataset.</p>
 </div>
 </div>
 </div>
@@ -7667,7 +7678,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Then, we visualize and plot the counts of each class.</p>
+<p>Then, we visualize the counts of each class.</p>
 </div>
 </div>
 </div>
@@ -7679,7 +7690,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-r"><pre><span></span><span class="c1"># Create a conditional distribution to study cleaned data</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Visualize counts</span>
 <span class="n">adult_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
 <span class="w">    </span><span class="nf">group_by</span><span class="p">(</span><span class="n">Sex</span><span class="p">,</span><span class="w"> </span><span class="n">Income</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
 <span class="w">    </span><span class="nf">tally</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span>
@@ -7739,7 +7750,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Lastly, we calculate the parameter estimate.</p>
+<p>Lastly, we calculate the observed difference in proportions.</p>
 </div>
 </div>
 </div>
@@ -7797,7 +7808,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Method:-Plan">Method: Plan<a class="anchor-link" href="#Method:-Plan">¶</a></h2>
+<h2 id="Methods:-Plan">Methods: Plan<a class="anchor-link" href="#Methods:-Plan">¶</a></h2>
 </div>
 </div>
 </div>
@@ -7808,15 +7819,15 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The dataset we are using to answer our question is from the UCI machine learning repository. It provides a large and representative sample of the male and female population and their respective income levels in the U.S.</p>
+<p>The dataset we are using to answer our question is from the UCI machine learning repository. It provides a large and representative sample of the male and female population and their respective income levels in the United States.</p>
 <p>Figure 2 and Figure 3 tells us the number of men and women whose income levels are greater than 50k or less than or equal to 50k. Our parameter estimate in Figure 4 suggests that the proportion of men who earn more than 50K is greater than the proportion of women. While this is true for the sample, it may not be true for the population and the estimate does not allow us to assess the statistical significance of our results. Therefore, we will conduct a hypothesis test to investigate if there is a significant difference in proportions of income levels between men and women and produce a confidence interval for our parameter.</p>
 <p><strong>Expectations and Potential Impact</strong></p>
 <p>Through our hypothesis test, we expect to infer the reasonability of our null or alternative hypotheses about the difference in proportions of men and women that earn more than 50k in the U.S.
-Our results could reveal significant findings in gender income inequality, which could bring more attention to issues regarding gender inequality and allow for better equity practices implemented in various industries.</p>
+Our results could reveal significant findings in gender income inequality, which could bring more attention to issues regarding gender inequality and encourage an improvement in equity practices in various industries.</p>
 <p><strong>Future Questions</strong></p>
 <p>What other factors can contribute to the difference in income levels of men and women?</p>
-<p>How does the income levels between men and women change across other regions and countries?</p>
-<p>How does other demographics affect income levels, such as race, age, and ethnicity.</p>
+<p>How do the income levels of men and women change across other regions and countries?</p>
+<p>How do demographics (such as race, age, and ethnicity) affect income levels?</p>
 </div>
 </div>
 </div>
@@ -7841,20 +7852,6 @@ Our results could reveal significant findings in gender income inequality, which
 <p>Becker, Barry and Kohavi, Ronny. (1996). Adult. UCI Machine Learning Repository. <a href="https://doi.org/10.24432/C5XW20">https://doi.org/10.24432/C5XW20</a></p>
 <p>Toczek, L., Bosma, H., &amp; Peter, R. (2021). “The Gender Pay Gap: Income Inequality Over Life Course - A Multilevel Analysis.” Frontiers in sociology, 6, 815376. <a href="https://doi.org/10.3389/fsoc.2021.815376">https://doi.org/10.3389/fsoc.2021.815376</a></p>
 <p>Rotman, A., &amp; Mandel, H. (2023). “Gender-Specific Wage Structure and the Gender Wage Gap in the U.S. Labor Market.” Social indicators research, 165(2), 585–606. <a href="https://doi.org/10.1007/s11205-022-03030-4">https://doi.org/10.1007/s11205-022-03030-4</a></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cf3b0084-9908-4966-9634-000698a4d747">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-r"><pre><span></span>
-</pre></div>
-</div>
 </div>
 </div>
 </div>
